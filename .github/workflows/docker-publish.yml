@@ -22,9 +22,16 @@ jobs:
         with:
           username: ${{ secrets.DOCKER_HUB_USERNAME }}
           password: ${{ secrets.DOCKER_HUB_ACCESS_TOKEN }}
+      
+      - id: compose
+        uses: pozetroninc/github-action-get-latest-release@master
+        with:
+          owner: docker
+          repo: compose
+          excludes: prerelease, draft
 
       - name: Build and tag image
-        run: docker build utility/. --tag serversideup/docker-utility
+        run: docker build utility/. --build-arg "COMPOSE_VERSION=${{ steps.compose.outputs.release }}" --tag serversideup/docker-utility
 
       - name: Push version image to DockerHub
         run: docker push serversideup/docker-utility
