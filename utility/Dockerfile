@@ -4,7 +4,7 @@
 FROM docker:dind
 LABEL maintainer="Jay Rogers <@jaydrogers>"
 
-ARG COMPOSE_VERSION='v2.5.0'
+ARG COMPOSE_VERSION='v2.4.1'
 
 # Install docker compose
 RUN apk add --no-cache curl \
