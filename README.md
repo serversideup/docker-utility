@@ -18,7 +18,7 @@ It's stupid simple...
 Rather than building this manually on every run, we decided to make the image publicly available.
 
 * It's based off of Docker-In-Docker
-* We add `docker-compose` to it
+* We add `docker compose` (v2) to it
 * We may also add other small utilities to it
 
 # Questions
