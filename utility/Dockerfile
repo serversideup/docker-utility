@@ -1,14 +1,22 @@
 ####################################################
 # Server Side Up -  Docker Utility Image
 #####################################################
-FROM docker:dind
+FROM docker:20.10.17-dind as upstream
 LABEL maintainer="Jay Rogers <@jaydrogers>"
 
-ARG COMPOSE_VERSION='v2.4.1'
+# copy everything to a clean image, so we can change the exposed ports
+# see https://gitlab.com/search?search=Service+docker+dind+probably+didn%27t+start+properly&nav_source=navbar&project_id=250833&group_id=9970&scope=issues&sort=updated_desc
+FROM scratch
 
-# Install docker compose
-RUN apk add --no-cache curl \
-    && mkdir -p $HOME/.docker/cli-plugins \
-    && curl -SL https://github.com/docker/compose/releases/download/${COMPOSE_VERSION}/docker-compose-linux-x86_64 -o $HOME/.docker/cli-plugins/docker-compose \
-    && chmod 755 $HOME/.docker/cli-plugins/docker-compose \
-    && rm -rf /var/cache/apk/*
+COPY --from=upstream / /
+
+VOLUME /var/lib/docker
+
+#EXPOSE 2375/tcp # is for insecure connections, and having both breaks GitLab's "wait-for-it" service
+EXPOSE 2376/tcp
+
+ENTRYPOINT ["dockerd-entrypoint.sh"]
+CMD []
+
+ENV DOCKER_VERSION=20.10.17
+ENV DOCKER_TLS_CERTDIR='/certs'
