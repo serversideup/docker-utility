@@ -1,7 +1,7 @@
 ####################################################
 # Server Side Up -  Docker Utility Image
 #####################################################
-FROM docker:20.10.17-dind as upstream
+FROM docker:20.10.16-dind as upstream
 LABEL maintainer="Jay Rogers <@jaydrogers>"
 
 # copy everything to a clean image, so we can change the exposed ports
