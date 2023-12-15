@@ -1,4 +1,4 @@
-# ⚠️ Archive Warning -- this project is being deprecated and will eventually be set into "ready-only"
+# ⚠️ Archive Warning -- this project is being deprecated and will eventually be set into "read-only"
 <p align="center">
 		<img src="https://raw.githubusercontent.com/serversideup/docker-utility/main/.github/header.png" width="1200" alt="Docker Images Logo">
 </p>
